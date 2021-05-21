@@ -2,12 +2,8 @@ import Head from 'next/head';
 import styled from 'styled-components';
 
 const Main = styled.main`
-  position: absolute;
-  left: 50%;
-  top: 50%;
   font-size: 4vmin;
   font-family: sans-serif;
-  transform: translate(-50%, -50%);
 `;
 
 export default function Home() {
