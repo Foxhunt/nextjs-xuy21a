@@ -1,3 +1,3 @@
-# nextjs-xuy21a
+# Mojica.de
 
 [Edit on StackBlitz ⚡️](https://stackblitz.com/edit/nextjs-xuy21a)
