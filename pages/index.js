@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import styled from 'styled-components';
+import { GitHub, Instagram } from 'react-feather';
 
 const Main = styled.main`
   font-size: 4vmin;
@@ -13,17 +14,18 @@ export default function Home() {
         <title>Marco Mojica</title>
       </Head>
       <Main>
-        Marco Mojica
-        <br />
-        <br />
-        +49 1515 4750027
-        <br />
-        <a href="mailto:marco@mojica.de">marco@mojica.de</a>
-        <br />
-        <br />
-        Rather Str. 21e
-        <br />
-        40476 Düsseldorf
+        <p>Marco Mojica</p>
+        <p>
+          <a href="mailto:marco@mojica.de">marco@mojica.de</a>
+        </p>
+        <p>
+          <a href="https://github.com/Foxhunt" target="_blank">
+            <GitHub />
+          </a>
+          <a href="https://www.instagram.com/wasfuernname/" target="_blank">
+            <Instagram />
+          </a>
+        </p>
       </Main>
     </>
   );
