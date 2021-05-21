@@ -1,9 +1,10 @@
-import { createGlobalStyle, ThemeProvider } from 'styled-components';
+import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
   body {
     margin: 0;
     padding: 0;
+    height: 100vh;
     box-sizing: border-box;
   
     display: flex;
@@ -12,19 +13,11 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-const theme = {
-  colors: {
-    primary: '#0070f3'
-  }
-};
-
 export default function App({ Component, pageProps }) {
   return (
     <>
       <GlobalStyle />
-      <ThemeProvider theme={theme}>
-        <Component {...pageProps} />
-      </ThemeProvider>
+      <Component {...pageProps} />
     </>
   );
 }
