@@ -1,10 +1,16 @@
 import Head from 'next/head';
 import styled from 'styled-components';
-import { GitHub, Instagram } from 'react-feather';
+
+import Bio from "../components/Bio"
+import Work from "../components/Work"
 
 const Main = styled.main`
   font-size: 4vmin;
   font-family: sans-serif;
+
+  & svg {
+    margin-right: 10px;
+  }
 `;
 
 export default function Home() {
@@ -14,18 +20,8 @@ export default function Home() {
         <title>Marco Mojica</title>
       </Head>
       <Main>
-        <p>Marco Mojica</p>
-        <p>
-          <a href="mailto:marco@mojica.de">marco@mojica.de</a>
-        </p>
-        <p>
-          <a href="https://github.com/Foxhunt" target="_blank">
-            <GitHub />
-          </a>
-          <a href="https://www.instagram.com/wasfuernname/" target="_blank">
-            <Instagram />
-          </a>
-        </p>
+        <Bio />
+        <Work />
       </Main>
     </>
   );
