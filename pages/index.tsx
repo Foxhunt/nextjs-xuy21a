@@ -5,6 +5,12 @@ import Bio from "../components/Bio"
 import Work from "../components/Work"
 
 const Main = styled.main`
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
   font-size: 4vmin;
   font-family: sans-serif;
 

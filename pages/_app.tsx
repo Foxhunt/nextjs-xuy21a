@@ -4,12 +4,12 @@ const GlobalStyle = createGlobalStyle`
   body {
     margin: 0;
     padding: 0;
-    height: 100vh;
     box-sizing: border-box;
   
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    & #__next {
+      display: flex;
+      justify-content: center;
+    }
   }
 `;
 
