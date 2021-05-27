@@ -22,10 +22,16 @@ export default function Bio(){
       <a href="mailto:marco@mojica.de">marco@mojica.de</a>
     </Line>
     <Line>
-      <Link href="https://github.com/Foxhunt" target="_blank">
+      <Link
+        target="_blank"
+        rel="noopener noreferrer"
+        href="https://github.com/Foxhunt">
         <GitHub width="8vmin" height="8vmin"/>
       </Link>
-      <Link href="https://www.instagram.com/wasfuernname/" target="_blank">
+      <Link
+        target="_blank"
+        rel="noopener noreferrer"
+        href="https://www.instagram.com/wasfuernname/">
         <Instagram width="8vmin" height="8vmin"/>
       </Link>
     </Line>
