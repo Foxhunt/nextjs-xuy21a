@@ -8,18 +8,26 @@ export default function Work(){
   return <>
     <p>Projects</p>
     <Entry
+      target="_blank"
+      rel="noopener noreferrer"
       href="https://indexed.cloud/">
       indexed.cloud
     </Entry>
     <Entry
+      target="_blank"
+      rel="noopener noreferrer"
       href="https://github-event-well-foxhunt.vercel.app/">
       github-event-well
     </Entry>
     <Entry
+      target="_blank"
+      rel="noopener noreferrer"
       href="https://convos.art/">
       convos.art
     </Entry>
     <Entry
+      target="_blank"
+      rel="noopener noreferrer"
       href="https://dreambook.space/">
       dreambook.space
     </Entry>
