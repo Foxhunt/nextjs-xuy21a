@@ -9,14 +9,10 @@ const Main = styled.main`
 
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
 
-  font-size: 4vmin;
+  font-size: 6vmin;
   font-family: sans-serif;
-
-  & svg {
-    margin-right: 10px;
-  }
 `;
 
 export default function Home() {
