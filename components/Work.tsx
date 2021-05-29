@@ -1,7 +1,7 @@
 import styled from "styled-components"
 
 const Entry = styled.a`
-  margin: 5px 0px;
+  margin: 10px 0px;
 `
 
 export default function Work(){
@@ -30,6 +30,12 @@ export default function Work(){
       rel="noopener noreferrer"
       href="https://dreambook.space/">
       dreambook.space
+    </Entry>
+    <Entry
+      target="_blank"
+      rel="noopener noreferrer"
+      href="https://quorum-sensing-axnuog89l.now.sh/">
+      quorum-sensing
     </Entry>
   </>
 }
