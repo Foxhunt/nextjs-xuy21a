@@ -23,12 +23,14 @@ export default function Bio(){
     </Line>
     <Line>
       <Link
+        aria-label="GitHub"
         target="_blank"
         rel="noopener noreferrer"
         href="https://github.com/Foxhunt">
         <GitHub width="8vmin" height="8vmin"/>
       </Link>
       <Link
+        aria-label="Instagram"
         target="_blank"
         rel="noopener noreferrer"
         href="https://www.instagram.com/wasfuernname/">
