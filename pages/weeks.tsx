@@ -1,52 +1,40 @@
 import Head from 'next/head';
-import {differenceInWeeks} from "date-fns"
-import styled from "styled-components"
-
-const Main = styled.main`
-  width: 100vw;
-
-  display: grid;
-  grid-template-columns: repeat(52, calc(100vw / 52));
-  grid-template-rows: repeat(100, calc(100vw / 52));
-  gap: 5px;
-`;
-
-const Week = styled.div`
-  background-color: #ececec;
-  border-radius: 50%;
-  border: 1px solid #a6a6a6;
-`
-
-const PassedWeek = styled(Week)`
-  background-color: #9d9dff;
-`
+import { Container, Grid, Box } from "@chakra-ui/react"
+import { differenceInWeeks } from "date-fns"
 
 export default function Weeks() {
-
-const birth = new Date(1991, 8, 17)
-
-const today = new Date()
-
-const diference = differenceInWeeks(today, birth)
-
-let weeks = []
-
-for (let week = 0; week < 100 * 52; week++){
-  if(week < diference) {
-    weeks.push(<PassedWeek key={week} />)
-  } else {
-    weeks.push(<Week key={week} />)
-  }
-}
+  const birth = new Date(1991, 8, 17)
+  const today = new Date()
+  const diference = differenceInWeeks(today, birth)
+  const weeks = new Array(100 * 52).fill("").map((_, index) =>
+    index < diference ?
+      <Box
+        key={index}
+        h="calc(100vw / 52 - 4px)"
+        bg="#ececec"
+        borderRadius="full"
+        border="1px solid #a6a6a6" />
+      :
+      <Box
+        key={index}
+        h="calc(100vw / 52 - 4px)"
+        bg="#9d9dff"
+        borderRadius="full"
+        border="1px solid #a6a6a6" />
+  )
 
   return (
-    <>
+    <Container
+      centerContent>
       <Head>
         <title>Weeks</title>
       </Head>
-      <Main>
-      {weeks}
-      </Main>
-    </>
+      <Grid
+        pt="1"
+        gap="3px"
+        templateColumns="repeat(52, calc(100vw / 52 - 4px))">
+        {weeks}
+      </Grid >
+    </Container >
   );
 }

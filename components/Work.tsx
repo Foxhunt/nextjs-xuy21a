@@ -1,41 +1,41 @@
-import styled from "styled-components"
+import { Link, Heading, Container, VStack } from "@chakra-ui/react"
 
-const Entry = styled.a`
-  margin: 10px 0px;
-`
-
-export default function Work(){
-  return <>
-    <p>Projects</p>
-    <Entry
-      target="_blank"
-      rel="noopener noreferrer"
-      href="https://indexed.cloud/">
-      indexed.cloud
-    </Entry>
-    <Entry
-      target="_blank"
-      rel="noopener noreferrer"
-      href="https://github-event-well-foxhunt.vercel.app/">
-      github-event-well
-    </Entry>
-    <Entry
-      target="_blank"
-      rel="noopener noreferrer"
-      href="https://convos.art/">
-      convos.art
-    </Entry>
-    <Entry
-      target="_blank"
-      rel="noopener noreferrer"
-      href="https://dreambook.space/">
-      dreambook.space
-    </Entry>
-    <Entry
-      target="_blank"
-      rel="noopener noreferrer"
-      href="https://quorum-sensing-axnuog89l.now.sh/">
-      quorum-sensing
-    </Entry>
-  </>
+export default function Work() {
+  return <Container>
+    <Heading mt="3">Projects</Heading>
+    <VStack
+      spacing="2"
+      align="flex-start">
+      <Link
+        target="_blank"
+        rel="noopener noreferrer"
+        href="https://indexed.cloud/">
+        indexed.cloud
+      </Link>
+      <Link
+        target="_blank"
+        rel="noopener noreferrer"
+        href="https://github-event-well-foxhunt.vercel.app/">
+        github-event-well
+      </Link>
+      <Link
+        target="_blank"
+        rel="noopener noreferrer"
+        href="https://convos.art/">
+        convos.art
+      </Link>
+      <Link
+        target="_blank"
+        rel="noopener noreferrer"
+        href="https://dreambook.space/">
+        dreambook.space
+      </Link>
+      <Link
+        target="_blank"
+        rel="noopener noreferrer"
+        href="https://quorum-sensing-axnuog89l.now.sh/">
+        quorum-sensing
+      </Link>
+    </VStack>
+  </Container>
 }

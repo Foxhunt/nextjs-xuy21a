@@ -1,41 +1,38 @@
-import styled from "styled-components"
-import { GitHub, Instagram } from 'react-feather';
+import { Container, Heading, HStack, Link, Icon } from "@chakra-ui/react";
+import { GitHub, Instagram, Mail } from 'react-feather';
 
-const Container = styled.div`
-
-`
-
-const Line = styled.p`
-  margin: 4vmin 0px;
-`
-
-const Link = styled.a`
-  margin-right: 5vmin;
-`
-
-export default function Bio(){
+export default function Bio() {
   return <Container>
-    <Line>
+    <Heading>
       Marco Mojica
-    </Line>
-    <Line>
-      <a href="mailto:marco@mojica.de">marco@mojica.de</a>
-    </Line>
-    <Line>
+    </Heading>
+    <HStack mt="3">
+      <Link
+        aria-label="Mail"
+        href="mailto:marco@mojica.de">
+        <Icon
+          w="7"
+          h="7"
+          as={Mail} />
+      </Link>
       <Link
         aria-label="GitHub"
-        target="_blank"
-        rel="noopener noreferrer"
+        isExternal
         href="https://github.com/Foxhunt">
-        <GitHub width="8vmin" height="8vmin"/>
+        <Icon
+          w="7"
+          h="7"
+          as={GitHub} />
       </Link>
       <Link
         aria-label="Instagram"
-        target="_blank"
-        rel="noopener noreferrer"
+        isExternal
         href="https://www.instagram.com/wasfuernname/">
-        <Instagram width="8vmin" height="8vmin"/>
+        <Icon
+          w="7"
+          h="7"
+          as={Instagram} />
       </Link>
-    </Line>
-  </Container>
+    </HStack>
+  </Container >
 }
