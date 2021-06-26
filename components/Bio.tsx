@@ -3,10 +3,10 @@ import { GitHub, Instagram, Mail } from 'react-feather';
 
 export default function Bio() {
   return <Container>
-    <Heading>
+    <Heading whiteSpace="nowrap">
       Marco Mojica
     </Heading>
-    <HStack mt="3">
+    <HStack>
       <Link
         aria-label="Mail"
         href="mailto:marco@mojica.de">
