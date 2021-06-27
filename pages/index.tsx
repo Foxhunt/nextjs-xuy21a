@@ -8,10 +8,10 @@ import Work from "../components/Work"
 // If this “Emoji” bothers you as much as me, welcome.
 // The fact you are reading this lets me know you are of the curious kind.
 // You either cloned the repo, started editing on StackBlitz or just checked out the files on GitHub.
-// This is a personal Blog and portfolio Page.
+// Or you are reading the sourcemaps, Nerd.
+// This is a portfolio Page and personal Blog.
 // You are welcome to look around and give your thoughts.
 // I hope you find something for your curiosity.
-
 
 export default function Home() {
   return (
