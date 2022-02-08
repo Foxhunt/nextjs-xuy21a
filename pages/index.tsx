@@ -1,8 +1,8 @@
 import Head from 'next/head';
 import { Container, Stack } from '@chakra-ui/react';
 
-import Bio from "../components/Bio"
-import Work from "../components/Work"
+import Bio from '../components/Bio';
+import Work from '../components/Work';
 
 // Hello there ( •̀ ω •́ )y
 // If this “Emoji” bothers you as much as me, welcome.
@@ -19,11 +19,10 @@ export default function Home() {
       <Head>
         <title>Marco Mojica</title>
       </Head>
-      <Stack
-        direction={["column", "row"]}
-        spacing={["30"]}>
+      <Stack direction={['column', 'row']} spacing={['30']}>
         <Bio />
         <Work />
+        <div>Test</div>
       </Stack>
     </Container>
   );
