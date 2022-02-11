@@ -8,7 +8,7 @@ const Circle = (props) => (
       cx="10"
       cy="10"
       r="10"
-      stroke-width="1"
+      strokeWidth="1"
       stroke="#a6a6a6"
       fill="currentColor"
     />
