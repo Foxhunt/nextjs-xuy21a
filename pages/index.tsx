@@ -22,7 +22,6 @@ export default function Home() {
       <Stack direction={['column', 'row']} spacing={['30']}>
         <Bio />
         <Work />
-        <div>Test</div>
       </Stack>
     </Container>
   );
