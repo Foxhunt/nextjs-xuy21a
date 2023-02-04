@@ -1,52 +1,30 @@
-import { Link, Heading, Container, VStack } from '@chakra-ui/react';
+import { Container, Heading, VStack } from "@chakra-ui/react";
+import ExternalLink from "./ExternalLink";
 
 export default function Work() {
   return (
     <Container>
       <Heading my={3}>Projects</Heading>
       <VStack spacing="2" fontSize="2xl" align="flex-start">
-        <Link
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://indexed.cloud/"
-        >
+        <ExternalLink href={"https://indexed.cloud/"}>
           indexed.cloud
-        </Link>
-        <Link
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://www.welldone24.de/"
-        >
+        </ExternalLink>
+        <ExternalLink href="https://spinning-spiral.vercel.app/">
+          spinning-spiral
+        </ExternalLink>
+        <ExternalLink href="https://www.welldone24.de/">
           welldone24
-        </Link>
-        <Link
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://github-event-well-foxhunt.vercel.app/"
-        >
+        </ExternalLink>
+        <ExternalLink href="https://github-event-well-foxhunt.vercel.app/">
           github-event-well
-        </Link>
-        <Link
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://convos.art/"
-        >
-          convos.art
-        </Link>
-        <Link
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://dreambook.space/"
-        >
+        </ExternalLink>
+        <ExternalLink href="https://convos.art/">convos.art</ExternalLink>
+        <ExternalLink href="https://dreambookspace.vercel.app/">
           dreambook.space
-        </Link>
-        <Link
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://quorum-sensing-axnuog89l.now.sh/"
-        >
+        </ExternalLink>
+        <ExternalLink href="https://quorum-sensing-axnuog89l.now.sh/">
           quorum-sensing
-        </Link>
+        </ExternalLink>
       </VStack>
     </Container>
   );
