@@ -3,7 +3,7 @@ import { Link, Heading, Container, VStack } from '@chakra-ui/react';
 export default function Work() {
   return (
     <Container>
-      <Heading>Projects</Heading>
+      <Heading my={3}>Projects</Heading>
       <VStack spacing="2" fontSize="2xl" align="flex-start">
         <Link
           target="_blank"

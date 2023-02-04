@@ -1,11 +1,13 @@
-import { Container, Heading, HStack, Link, Icon } from '@chakra-ui/react';
-import { GitHub, Instagram, Mail, Phone } from 'react-feather';
+import { Container, Heading, HStack, Link, Icon } from "@chakra-ui/react";
+import { GitHub, Instagram, Mail, Phone } from "react-feather";
 
 export default function Bio() {
   return (
     <Container>
-      <Heading whiteSpace="nowrap">Marco Mojica</Heading>
-      <HStack>
+      <Heading my={3} whiteSpace="nowrap">
+        Marco Mojica
+      </Heading>
+      <HStack justify={"space-between"}>
         <Link aria-label="Mail" isExternal href="mailto:marco@mojica.de">
           <Icon w="7" h="7" as={Mail} />
         </Link>

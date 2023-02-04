@@ -15,7 +15,7 @@ import Work from '../components/Work';
 
 export default function Home() {
   return (
-    <Container centerContent pt="5" color="black">
+    <Container pt="5" color="black">
       <Head>
         <title>Marco Mojica</title>
       </Head>
