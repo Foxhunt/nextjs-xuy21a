@@ -1,8 +1,8 @@
-import Head from 'next/head';
-import { Container, Stack } from '@chakra-ui/react';
+import { Container, Stack } from "@chakra-ui/react";
 
-import Bio from '../components/Bio';
-import Work from '../components/Work';
+import { NextSeo } from "next-seo";
+import Bio from "../components/Bio";
+import Work from "../components/Work";
 
 // Hello there ( •̀ ω •́ )y
 // If this “Emoji” bothers you as much as me, welcome.
@@ -16,10 +16,11 @@ import Work from '../components/Work';
 export default function Home() {
   return (
     <Container pt="5" color="black">
-      <Head>
-        <title>Marco Mojica</title>
-      </Head>
-      <Stack direction={['column', 'row']} spacing={['30']}>
+      <NextSeo
+        title="Marco Mojica"
+        description="Personal Hompage of Marco Mojica. Take a look at some of his Projects on GitHub or his private Instagram Account."
+      />
+      <Stack direction={["column", "row"]} spacing={["30"]}>
         <Bio />
         <Work />
       </Stack>

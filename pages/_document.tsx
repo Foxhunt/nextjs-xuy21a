@@ -1,15 +1,12 @@
-import Document, { Html, Head, Main, NextScript } from 'next/document';
-import { ColorModeScript } from '@chakra-ui/react'
+import Document, { Html, Head, Main, NextScript } from "next/document";
+import { ColorModeScript } from "@chakra-ui/react";
 
 export default class MyDocument extends Document {
   render() {
     return (
       <Html lang="en">
         <Head>
-          <meta
-            name="description"
-            content="Personal Hompage of Marco Mojica.
-                     Take a look at some of his Projects on GitHub or his private Instagram Account." />
+          <meta name="description" content="" />
         </Head>
         <body>
           <ColorModeScript />
@@ -17,6 +14,6 @@ export default class MyDocument extends Document {
           <NextScript />
         </body>
       </Html>
-    )
+    );
   }
 }
