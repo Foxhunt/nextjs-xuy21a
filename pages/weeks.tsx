@@ -1,17 +1,18 @@
-import Head from 'next/head';
-import { Container, Grid, Icon } from '@chakra-ui/react';
-import { differenceInWeeks } from 'date-fns';
+import Head from "next/head";
+import { Container, Grid, Icon } from "@chakra-ui/react";
+import { differenceInWeeks } from "date-fns";
 
-const Circle = (props) => (
-  <Icon viewBox="0 0 20 20" {...props}>
+const Circle = ({ color, children }) => (
+  <Icon viewBox="0 0 30 30" color={color} h="calc(100vw / 52 - 4px)">
     <circle
-      cx="10"
-      cy="10"
-      r="10"
-      strokeWidth="1"
+      cx="15"
+      cy="15"
+      r="13"
+      strokeWidth="2"
       stroke="#a6a6a6"
       fill="currentColor"
     />
+    {children}
   </Icon>
 );
 
@@ -19,15 +20,31 @@ export default function Weeks() {
   const birth = new Date(1991, 8, 17);
   const today = new Date();
   const diference = differenceInWeeks(today, birth);
-  const weeks = new Array(100 * 52)
-    .fill('')
-    .map((_, index) =>
-      index < diference ? (
-        <Circle key={index} h="calc(100vw / 52 - 4px)" color="#ececec" />
-      ) : (
-        <Circle key={index} h="calc(100vw / 52 - 4px)" color="#9d9dff" />
-      )
-    );
+  const weeks = new Array(100 * 53).fill("").map((_, index) =>
+    index % 53 === 0 ? (
+      <Circle key={index} color={"black"}>
+        <text
+          x="50%"
+          y="50%"
+          dy=".35em"
+          textAnchor="middle"
+          fontWeight="bolder"
+          fill="white"
+        >
+          {index / 53}
+        </text>
+      </Circle>
+    ) : (
+      <Circle
+        key={index}
+        color={index - index / 53 < diference ? "#ececec" : "#9d9dff"}
+      >
+        <text x="50%" y="50%" dy=".35em" textAnchor="middle">
+          {(index % 53) - 1}
+        </text>
+      </Circle>
+    )
+  );
 
   return (
     <Container centerContent>
@@ -39,7 +56,7 @@ export default function Weeks() {
         gap="3px"
         justifyItems="center"
         alignItems="center"
-        templateColumns="repeat(52, calc(100vw / 52 - 4px))"
+        templateColumns="repeat(53, calc(100vw / 53 - 4px))"
       >
         {weeks}
       </Grid>
