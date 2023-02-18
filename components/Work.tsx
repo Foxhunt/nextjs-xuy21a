@@ -6,14 +6,17 @@ export default function Work() {
     <Container>
       <Heading my={3}>Projects</Heading>
       <VStack spacing="2" fontSize="2xl" align="flex-start">
+        <ExternalLink href="https://www.welldone24.de/">
+          Welldone24
+        </ExternalLink>
+        <ExternalLink href={"https://app.mobilesys.de/login"}>
+          GoFundYourself
+        </ExternalLink>
         <ExternalLink href={"https://indexed.cloud/"}>
           indexed.cloud
         </ExternalLink>
         <ExternalLink href="https://spinning-spiral.vercel.app/">
           spinning-spiral
-        </ExternalLink>
-        <ExternalLink href="https://www.welldone24.de/">
-          welldone24
         </ExternalLink>
         <ExternalLink href="https://github-event-well-foxhunt.vercel.app/">
           github-event-well
