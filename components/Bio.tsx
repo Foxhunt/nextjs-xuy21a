@@ -1,10 +1,19 @@
 import { Container, Heading, HStack, Link, Icon } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 import { GitHub, Instagram, Mail, Phone } from "react-feather";
 
 export default function Bio() {
+  const router = useRouter();
   return (
     <Container>
-      <Heading my={3} whiteSpace="nowrap">
+      <Heading
+        my={3}
+        whiteSpace="nowrap"
+        onContextMenu={(event) => {
+          event.preventDefault();
+          router.push("weeks");
+        }}
+      >
         Marco Mojica
       </Heading>
       <HStack justify={"space-between"}>
