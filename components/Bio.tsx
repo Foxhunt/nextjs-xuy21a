@@ -1,13 +1,15 @@
 import { Container, Heading, HStack, Link, Icon } from "@chakra-ui/react";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import { GitHub, Instagram, Mail, Phone } from "react-feather";
+
+import mmojica from "../public/mmojica.jpg";
 
 export default function Bio() {
   const router = useRouter();
   return (
-    <Container>
+    <Container gap={6} display="flex" flexDir="column">
       <Heading
-        my={3}
         whiteSpace="nowrap"
         onContextMenu={(event) => {
           event.preventDefault();
@@ -38,6 +40,7 @@ export default function Bio() {
           <Icon w="7" h="7" as={Instagram} />
         </Link>
       </HStack>
+      <Image src={mmojica} alt="Marco Mojica" />
     </Container>
   );
 }
