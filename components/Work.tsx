@@ -6,6 +6,9 @@ export default function Work() {
     <Container>
       <Heading my={3}>Projects</Heading>
       <VStack spacing="2" fontSize="2xl" align="flex-start">
+        <ExternalLink href="https://www.bretagne.website/">
+          Extra Muros 2022 Bretange
+        </ExternalLink>
         <ExternalLink href="https://www.welldone24.de/">
           Welldone24
         </ExternalLink>

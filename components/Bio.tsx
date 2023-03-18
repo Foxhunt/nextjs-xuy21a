@@ -11,7 +11,11 @@ export default function Bio() {
         <Link aria-label="Mail" isExternal href="mailto:marco@mojica.de">
           <Icon w="7" h="7" as={Mail} />
         </Link>
-        <Link aria-label="Mail" isExternal href="tel:+4915154750027">
+        <Link
+          aria-label={"+4915154750027".split("").join(" ")}
+          isExternal
+          href="tel:+4915154750027"
+        >
           <Icon w="7" h="7" as={Phone} />
         </Link>
         <Link aria-label="GitHub" isExternal href="https://github.com/Foxhunt">
