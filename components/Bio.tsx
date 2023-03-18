@@ -2,8 +2,8 @@ import {
   Container,
   Heading,
   HStack,
-  Link,
   Icon,
+  Link,
   VStack,
 } from "@chakra-ui/react";
 import Image from "next/image";
@@ -14,6 +14,7 @@ import mmojica from "../public/mmojica.jpg";
 
 export default function Bio() {
   const router = useRouter();
+
   return (
     <Container>
       <VStack gap={3} display="flex" flexDir="column">
