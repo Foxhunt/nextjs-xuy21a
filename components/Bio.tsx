@@ -17,7 +17,7 @@ export default function Bio() {
 
   return (
     <Container>
-      <VStack gap={3} display="flex" flexDir="column">
+      <VStack gap={3} display="flex" flexDir="column" alignItems={"stretch"}>
         <Heading
           whiteSpace="nowrap"
           onContextMenu={(event) => {
