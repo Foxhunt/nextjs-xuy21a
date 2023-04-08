@@ -53,7 +53,14 @@ export default function Bio() {
             <Icon w="7" h="7" as={Instagram} />
           </Link>
         </HStack>
-        <Image src={mmojica} alt="Marco Mojica" />
+        <Image
+          priority
+          src={mmojica}
+          alt="Marco Mojica"
+          sizes="(max-width: 768px) 100vw,
+              (max-width: 1200px) 50vw,
+              33vw"
+        />
       </VStack>
     </Container>
   );
