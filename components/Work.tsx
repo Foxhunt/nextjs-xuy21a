@@ -1,11 +1,15 @@
-import { Container, Heading, VStack } from "@chakra-ui/react";
+import { Container, Heading, Link, VStack } from "@chakra-ui/react";
 import ExternalLink from "./ExternalLink";
+import NextLink from "next/link";
 
 export default function Work() {
   return (
     <Container>
       <Heading my={3}>Projects</Heading>
       <VStack spacing="2" fontSize="2xl" align="flex-start">
+        <Link as={NextLink} href="/MarcoGPT" prefetch>
+          MarcoGPT
+        </Link>
         <ExternalLink href="https://www.bretagne.website/">
           Extra Muros 2022 Bretange
         </ExternalLink>
