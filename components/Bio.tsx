@@ -6,6 +6,7 @@ import {
   Link,
   VStack,
 } from "@chakra-ui/react";
+import NextLink from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { GitHub, Instagram, Mail, Phone } from "react-feather";
@@ -53,14 +54,16 @@ export default function Bio() {
             <Icon w="7" h="7" as={Instagram} />
           </Link>
         </HStack>
-        <Image
-          priority
-          src={mmojica}
-          alt="Marco Mojica"
-          sizes="(max-width: 768px) 100vw,
-              (max-width: 1200px) 50vw,
-              33vw"
-        />
+        <NextLink href={"/MarcoGPT"}>
+          <Image
+            priority
+            src={mmojica}
+            alt="Marco Mojica"
+            sizes="(max-width: 768px) 100vw,
+          (max-width: 1200px) 50vw,
+          33vw"
+          />
+        </NextLink>
       </VStack>
     </Container>
   );
