@@ -6,11 +6,16 @@ import {
   Skeleton,
   Stack,
 } from "@chakra-ui/react";
-import { ChatCompletionRequestMessage, Configuration, OpenAIApi } from "openai";
+import type { ChatCompletionRequestMessage } from "openai";
 import { useState } from "react";
 
 export default function MarcoGPT() {
-  const [messages, setMessages] = useState<ChatCompletionRequestMessage[]>([]);
+  const [messages, setMessages] = useState<ChatCompletionRequestMessage[]>([
+    {
+      role: "assistant",
+      content: "Hallo, wie kann ich dir helfen?",
+    },
+  ]);
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
 
