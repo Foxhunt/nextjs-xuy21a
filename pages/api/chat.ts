@@ -14,9 +14,6 @@ export default async function handler(
 ) {
   const { input, messages } = req.body;
 
-  console.log("messages", messages);
-  console.log("input", input);
-
   const response = await openai.createChatCompletion({
     model: "gpt-3.5-turbo",
     temperature: 0.7,

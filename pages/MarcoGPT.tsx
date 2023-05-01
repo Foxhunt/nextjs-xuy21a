@@ -40,7 +40,7 @@ export default function MarcoGPT() {
 
   return (
     <Container color="black">
-      <Stack direction={"column"} h={"100vh"} py={4}>
+      <Stack direction={"column"} h={"100dvh"} py={4}>
         <Stack
           direction={"column"}
           flexGrow={1}
