@@ -1,3 +1,4 @@
+import kv from "@vercel/kv";
 import { NextApiRequest, NextApiResponse } from "next";
 import { Configuration, OpenAIApi } from "openai";
 
@@ -13,6 +14,11 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const { input, messages } = req.body;
+
+  console.log("messages:", messages);
+  console.log("input:", input);
+
+  await kv.rpush("inputs", input);
 
   const response = await openai.createChatCompletion({
     model: "gpt-3.5-turbo",
