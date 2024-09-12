@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import Head from "next/head";
 import { Container, Grid, Icon } from "@chakra-ui/react";
 import { differenceInWeeks } from "date-fns";
@@ -17,34 +18,40 @@ const Circle = ({ color, children }) => (
 );
 
 export default function Weeks() {
-  const birth = new Date(1991, 8, 17);
-  const today = new Date();
-  const diference = differenceInWeeks(today, birth);
-  const weeks = new Array(100 * 53).fill("").map((_, index) =>
-    index % 53 === 0 ? (
-      <Circle key={index} color={"black"}>
-        <text
-          x="50%"
-          y="50%"
-          dy=".35em"
-          textAnchor="middle"
-          fontWeight="bolder"
-          fill="white"
-        >
-          {index / 53}
-        </text>
-      </Circle>
-    ) : (
-      <Circle
-        key={index}
-        color={index - index / 53 < diference ? "#ececec" : "#9d9dff"}
-      >
-        <text x="50%" y="50%" dy=".35em" textAnchor="middle">
-          {(index % 53) - 1}
-        </text>
-      </Circle>
-    )
-  );
+  const [weeks, setWeeks] = useState([]);
+
+  useEffect(() => {
+    const birth = new Date(1991, 8, 17);
+    const today = new Date();
+    const diference = differenceInWeeks(today, birth);
+    setWeeks(
+      new Array(100 * 53).fill("").map((_, index) =>
+        index % 53 === 0 ? (
+          <Circle key={index} color={"black"}>
+            <text
+              x="50%"
+              y="50%"
+              dy=".35em"
+              textAnchor="middle"
+              fontWeight="bolder"
+              fill="white"
+            >
+              {index / 53}
+            </text>
+          </Circle>
+        ) : (
+          <Circle
+            key={index}
+            color={index - index / 53 < diference ? "#ececec" : "#9d9dff"}
+          >
+            <text x="50%" y="50%" dy=".35em" textAnchor="middle">
+              {(index % 53) - 1}
+            </text>
+          </Circle>
+        )
+      )
+    );
+  }, []);
 
   return (
     <Container centerContent>
