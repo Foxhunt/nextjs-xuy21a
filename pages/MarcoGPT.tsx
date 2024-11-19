@@ -6,11 +6,11 @@ import {
   Skeleton,
   Stack,
 } from "@chakra-ui/react";
-import type { ChatCompletionRequestMessage } from "openai";
+import type { ChatCompletionMessageParam } from "openai/resources/chat/completions";
 import { useState } from "react";
 
 export default function MarcoGPT() {
-  const [messages, setMessages] = useState<ChatCompletionRequestMessage[]>([
+  const [messages, setMessages] = useState<ChatCompletionMessageParam[]>([
     {
       role: "assistant",
       content: "Hallo, wie kann ich dir helfen?",
@@ -70,7 +70,7 @@ export default function MarcoGPT() {
                 }
               }}
             >
-              {message.content}
+              {typeof message.content === "string" && message.content}
             </Box>
           ))}
           {isTyping && (

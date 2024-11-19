@@ -1,13 +1,12 @@
-import kv from "@vercel/kv";
+import { kv } from "@vercel/kv";
 import { NextApiRequest, NextApiResponse } from "next";
-import { Configuration, OpenAIApi } from "openai";
+import OpenAI from "openai";
 
 const systemPrompt = process.env.SYSTEM_PROMPT.replace(/\\n/g, "\n");
 
-const configuration = new Configuration({
+const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
-const openai = new OpenAIApi(configuration);
 
 export default async function handler(
   req: NextApiRequest,
@@ -20,13 +19,9 @@ export default async function handler(
 
   await kv.rpush("inputs", input);
 
-  const response = await openai.createChatCompletion({
-    model: "gpt-3.5-turbo",
-    temperature: 0.7,
+  const chatCompletion = await openai.chat.completions.create({
+    model: "gpt-4o-mini",
     max_tokens: 256,
-    top_p: 1,
-    frequency_penalty: 0,
-    presence_penalty: 0,
     messages: [
       { role: "system", content: systemPrompt },
       ...messages,
@@ -34,5 +29,5 @@ export default async function handler(
     ],
   });
 
-  res.status(200).json({ message: response.data.choices[0].message });
+  res.status(200).json({ message: chatCompletion.choices[0].message });
 }
