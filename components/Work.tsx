@@ -10,15 +10,15 @@ export default function Work() {
         <Link as={NextLink} href="/MarcoGPT" prefetch>
           MarcoGPT
         </Link>
-        <ExternalLink href="https://www.bretagne.website/">
+        <ExternalLink href="https://bretagne.vercel.app/">
           Extra Muros 2022 Bretange
         </ExternalLink>
         <ExternalLink href="https://www.welldone24.de/">
           Welldone24
         </ExternalLink>
-        <ExternalLink href={"https://app.mobilesys.de/login"}>
+        {/* <ExternalLink href={"https://app.mobilesys.de/login"}>
           GoFundYourself
-        </ExternalLink>
+        </ExternalLink> */}
         <ExternalLink href={"https://indexed.cloud/"}>
           indexed.cloud
         </ExternalLink>
