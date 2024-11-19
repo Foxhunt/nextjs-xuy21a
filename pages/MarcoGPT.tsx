@@ -77,8 +77,7 @@ export default function MarcoGPT() {
             <Skeleton
               maxW={"80%"}
               h={"40px"}
-              startColor={"blue.300"}
-              endColor={"blue.100"}
+              colorPalette={"blue"}
               borderRadius={"xl"}
             >
               <Box
@@ -95,7 +94,7 @@ export default function MarcoGPT() {
             value={input}
             onChange={(event) => setInput(event.target.value)}
           />
-          <Button isDisabled={input === ""} type="submit">
+          <Button disabled={input === ""} type="submit">
             Send
           </Button>
         </Stack>

@@ -5,10 +5,14 @@ import NextLink from "next/link";
 export default function Work() {
   return (
     <Container>
-      <Heading my={3}>Projects</Heading>
-      <VStack spacing="2" fontSize="2xl" align="flex-start">
-        <Link as={NextLink} href="/MarcoGPT" prefetch>
-          MarcoGPT
+      <Heading my={3} textAlign={"end"}>
+        Projects
+      </Heading>
+      <VStack gap="2" fontSize="2xl" align="flex-end">
+        <Link asChild>
+          <NextLink href="/MarcoGPT" prefetch>
+            MarcoGPT
+          </NextLink>
         </Link>
         <ExternalLink href="https://bretagne.vercel.app/">
           Extra Muros 2022 Bretange

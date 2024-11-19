@@ -20,7 +20,7 @@ export default function Home() {
         title="Marco Mojica"
         description="Personal Hompage of Marco Mojica. Take a look at some of his Projects on GitHub or his private Instagram Account."
       />
-      <Stack direction={["column", "row"]} spacing={["30"]}>
+      <Stack direction={{ base: "column", md: "row" }} gap={"30"}>
         <Bio />
         <Work />
       </Stack>

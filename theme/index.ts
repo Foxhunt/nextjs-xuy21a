@@ -1,8 +1,12 @@
-import { extendTheme } from "@chakra-ui/react";
+import { createSystem, defaultConfig } from "@chakra-ui/react";
 
-export default extendTheme({
-  fonts: {
-    heading: "sans-serif",
-    body: "sans-serif",
+export default createSystem(defaultConfig, {
+  theme: {
+    tokens: {
+      fonts: {
+        heading: { value: "sans-serif" },
+        body: { value: "sans-serif" },
+      },
+    },
   },
 });

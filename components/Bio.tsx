@@ -29,29 +29,45 @@ export default function Bio() {
           Marco Mojica
         </Heading>
         <HStack justify={"space-between"}>
-          <Link aria-label="Mail" isExternal href="mailto:marco@mojica.de">
-            <Icon w="7" h="7" as={Mail} />
+          <Link
+            aria-label="Mail"
+            target="_blank"
+            rel="noopener noreferrer"
+            href="mailto:marco@mojica.de"
+          >
+            <Icon w="7" h="7">
+              <Mail />
+            </Icon>
           </Link>
           <Link
             aria-label={"+4915154750027".split("").join(" ")}
-            isExternal
+            target="_blank"
+            rel="noopener noreferrer"
             href="tel:+4915154750027"
           >
-            <Icon w="7" h="7" as={Phone} />
+            <Icon w="7" h="7">
+              <Phone />
+            </Icon>
           </Link>
           <Link
             aria-label="GitHub"
-            isExternal
+            target="_blank"
+            rel="noopener noreferrer"
             href="https://github.com/Foxhunt"
           >
-            <Icon w="7" h="7" as={GitHub} />
+            <Icon w="7" h="7">
+              <GitHub />
+            </Icon>
           </Link>
           <Link
             aria-label="Instagram"
-            isExternal
+            target="_blank"
+            rel="noopener noreferrer"
             href="https://www.instagram.com/wasfuernname/"
           >
-            <Icon w="7" h="7" as={Instagram} />
+            <Icon w="7" h="7">
+              <Instagram />
+            </Icon>
           </Link>
         </HStack>
         <NextLink href={"/MarcoGPT"}>
