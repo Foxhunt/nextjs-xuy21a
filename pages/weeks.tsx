@@ -18,7 +18,7 @@ const Circle = ({ color, children }) => (
 );
 
 export default function Weeks() {
-  const [weeks, setWeeks] = useState([]);
+  const [weeks, setWeeks] = useState<React.JSX.Element[]>([]);
 
   useEffect(() => {
     const birth = new Date(1991, 8, 17);

@@ -2,7 +2,7 @@ import { kv } from "@vercel/kv";
 import { NextApiRequest, NextApiResponse } from "next";
 import OpenAI from "openai";
 
-const systemPrompt = process.env.SYSTEM_PROMPT.replace(/\\n/g, "\n");
+const systemPrompt = process.env.SYSTEM_PROMPT!.replace(/\\n/g, "\n");
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
