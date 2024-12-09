@@ -11,7 +11,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { GitHub, Instagram, Mail, Phone } from "react-feather";
 
-import mmojica from "../public/mmojica.jpg";
+import mmojica from "../../public/mmojica.jpg";
 
 export default function Bio() {
   const router = useRouter();

@@ -22,7 +22,8 @@
     ],
     "strictNullChecks": true,
     "paths": {
-      "@payload-config": ["./payload.config.ts"]
+      "@payload-config": ["./payload.config.ts"],
+      "@/*": ["./src/*"]
     }
   },
   "include": [

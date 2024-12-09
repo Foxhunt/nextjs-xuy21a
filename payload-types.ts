@@ -11,7 +11,7 @@ export interface Config {
     users: UserAuthOperations;
   };
   collections: {
-    Events: Event;
+    EventTypes: EventType;
     EventLog: EventLog;
     users: User;
     'payload-locked-documents': PayloadLockedDocument;
@@ -20,7 +20,7 @@ export interface Config {
   };
   collectionsJoins: {};
   collectionsSelect: {
-    Events: EventsSelect<false> | EventsSelect<true>;
+    EventTypes: EventTypesSelect<false> | EventTypesSelect<true>;
     EventLog: EventLogSelect<false> | EventLogSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
@@ -61,12 +61,13 @@ export interface UserAuthOperations {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "Events".
+ * via the `definition` "EventTypes".
  */
-export interface Event {
+export interface EventType {
   id: string;
   name: string;
   description?: string | null;
+  lastUsedAt?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -76,7 +77,7 @@ export interface Event {
  */
 export interface EventLog {
   id: string;
-  type: string | Event;
+  type: string | EventType;
   endedAt?: string | null;
   updatedAt: string;
   createdAt: string;
@@ -106,8 +107,8 @@ export interface PayloadLockedDocument {
   id: number;
   document?:
     | ({
-        relationTo: 'Events';
-        value: string | Event;
+        relationTo: 'EventTypes';
+        value: string | EventType;
       } | null)
     | ({
         relationTo: 'EventLog';
@@ -161,12 +162,13 @@ export interface PayloadMigration {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "Events_select".
+ * via the `definition` "EventTypes_select".
  */
-export interface EventsSelect<T extends boolean = true> {
+export interface EventTypesSelect<T extends boolean = true> {
   id?: T;
   name?: T;
   description?: T;
+  lastUsedAt?: T;
   updatedAt?: T;
   createdAt?: T;
 }

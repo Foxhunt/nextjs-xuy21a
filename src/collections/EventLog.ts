@@ -11,7 +11,7 @@ export const EventLog: CollectionConfig = {
     {
       name: "type",
       type: "relationship",
-      relationTo: "Events",
+      relationTo: "EventTypes",
       required: true,
     },
     {

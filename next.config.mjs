@@ -1,5 +1,11 @@
 import { withPayload } from "@payloadcms/next/withPayload";
 
+import bundleanalyzer from "@next/bundle-analyzer";
+
+const withBundleAnalyzer = bundleanalyzer({
+  enabled: process.env.ANALYZE === "true",
+});
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   productionBrowserSourceMaps: true,
@@ -10,4 +16,4 @@ const nextConfig = {
 
 // Make sure you wrap your `nextConfig`
 // with the `withPayload` plugin
-export default withPayload(nextConfig);
+export default withPayload(withBundleAnalyzer(nextConfig));

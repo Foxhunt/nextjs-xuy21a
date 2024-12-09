@@ -1,8 +1,8 @@
 import { randomUUID } from "crypto";
 import type { CollectionConfig } from "payload";
 
-export const Events: CollectionConfig = {
-  slug: "Events",
+export const EventTypes: CollectionConfig = {
+  slug: "EventTypes",
   admin: { useAsTitle: "name" },
   fields: [
     {
@@ -11,6 +11,7 @@ export const Events: CollectionConfig = {
     },
     { name: "name", type: "text", required: true },
     { name: "description", type: "text" },
+    { name: "lastUsedAt", type: "date", defaultValue: new Date() },
   ],
   hooks: {
     beforeChange: [
