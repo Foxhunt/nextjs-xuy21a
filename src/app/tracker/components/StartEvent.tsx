@@ -19,6 +19,7 @@ export default function StartEvent({ eventTypes }: StartEvent) {
     <div className="grid grid-cols-1 gap-4 py-4">
       <Form
         className="flex flex-row gap-4"
+        validationBehavior="native"
         onSubmit={async (e) => {
           e.preventDefault();
           startEvent(e.currentTarget.elements["name"].value);
@@ -26,11 +27,11 @@ export default function StartEvent({ eventTypes }: StartEvent) {
       >
         <Autocomplete
           name="name"
-          required
+          isRequired
           allowsCustomValue
-          // label="Event Type"
           aria-label="Event Type"
           placeholder="Event Type"
+          errorMessage="Please select or enter an event type"
           defaultItems={eventTypes}
         >
           {(item) => (
