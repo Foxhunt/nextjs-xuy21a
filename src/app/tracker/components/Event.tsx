@@ -31,7 +31,7 @@ export default function Event({ event }: EventProps) {
       <CardHeader>{(event.type as EventType).name}</CardHeader>
       <CardBody className="flex-row">
         <div>
-          <div suppressHydrationWarning={true}>
+          <div>
             Start:{" "}
             {new Date(event.createdAt).toLocaleString("de-DE", {
               day: "2-digit",
@@ -43,7 +43,7 @@ export default function Event({ event }: EventProps) {
             })}
           </div>
           {event.endedAt && (
-            <div suppressHydrationWarning={true}>
+            <div>
               Ende:{" "}
               {new Date(event.endedAt).toLocaleString("de-DE", {
                 day: "2-digit",
@@ -55,7 +55,7 @@ export default function Event({ event }: EventProps) {
               })}
             </div>
           )}
-          <div suppressHydrationWarning={true}>
+          <div>
             Dauer:{" "}
             {new Date(duration).getUTCHours().toString().padStart(2, "0")}:
             {new Date(duration).getUTCMinutes().toString().padStart(2, "0")}:
