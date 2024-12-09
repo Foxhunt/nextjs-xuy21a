@@ -45,6 +45,7 @@ export default function StartEvent({ eventTypes }: StartEvent) {
       {eventTypes.slice(0, 5).map((event) => (
         <Button
           key={event.id}
+          type="submit"
           onPress={() => {
             startEvent(event.name);
           }}
