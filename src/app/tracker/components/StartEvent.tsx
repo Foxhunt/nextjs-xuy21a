@@ -23,7 +23,7 @@ export default function StartEvent({ eventTypes }: StartEvent) {
   return (
     <div className="grid grid-cols-1 gap-4 py-4">
       <Form
-        className="flex flex-col items-end gap-4"
+        className="gap-4 items-stretch"
         validationBehavior="native"
         onSubmit={(e) => {
           e.preventDefault();
@@ -54,6 +54,7 @@ export default function StartEvent({ eventTypes }: StartEvent) {
           </Button>
         </div>
         <Switch
+          className="self-end"
           name="stopRunningEvents"
           isSelected={stopRunningEvents}
           onValueChange={setStopRunningEvents}
