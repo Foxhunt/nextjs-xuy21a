@@ -67,7 +67,7 @@ export default function Event({ event }: EventProps) {
           <div className="grow flex justify-center items-center">
             <Button
               isLoading={isPending}
-              onClick={() => {
+              onPress={() => {
                 startTransition(() => {
                   stopEvent(event.id);
                 });
