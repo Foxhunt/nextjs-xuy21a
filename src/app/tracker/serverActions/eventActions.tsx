@@ -38,9 +38,31 @@ export async function stopEvent(id: string) {
   revalidatePath("/tracker");
 }
 
-export async function startEvent(eventTypeName: string) {
+export async function startEvent(
+  eventTypeName: string,
+  stopRunningEvents: boolean
+) {
   const payload = await getPayload({ config });
   const user = await authUser();
+
+  if (stopRunningEvents) {
+    const runningEvents = await payload.find({
+      collection: "EventLog",
+      sort: "-createdAt",
+      where: {
+        endedAt: {
+          equals: null,
+        },
+      },
+      overrideAccess: false,
+      user,
+    });
+
+    const stopEventPromisses = runningEvents.docs.map((event) =>
+      stopEvent(event.id)
+    );
+    await Promise.all(stopEventPromisses);
+  }
 
   const eventType = await payload.find({
     collection: "EventTypes",
