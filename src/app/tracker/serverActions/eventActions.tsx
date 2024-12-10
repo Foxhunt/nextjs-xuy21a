@@ -105,7 +105,7 @@ export async function createEventType(name: string) {
   const newEventType = await payload.create({
     collection: "EventTypes",
     data: {
-      name,
+      name: name.trim(),
     },
     overrideAccess: false,
     user,
