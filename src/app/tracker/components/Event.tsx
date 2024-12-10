@@ -1,8 +1,7 @@
 "use client";
 
-import { Card, CardBody, CardHeader } from "@nextui-org/card";
-import { Button } from "@nextui-org/react";
-import { useEffect, useState } from "react";
+import { Button, Card, CardBody, CardHeader } from "@nextui-org/react";
+import { useEffect, useState, useTransition } from "react";
 import { EventLog, EventType } from "../../../../payload-types.ts";
 import { stopEvent } from "../serverActions/eventActions.tsx";
 
@@ -11,6 +10,8 @@ type EventProps = {
 };
 
 export default function Event({ event }: EventProps) {
+  const [isPending, startTransition] = useTransition();
+
   const [duration, setDuration] = useState(
     (event.endedAt ? new Date(event.endedAt).getTime() : Date.now()) -
       new Date(event.createdAt).getTime()
@@ -65,8 +66,11 @@ export default function Event({ event }: EventProps) {
         {!event.endedAt && (
           <div className="grow flex justify-center items-center">
             <Button
-              onPress={() => {
-                stopEvent(event.id);
+              isLoading={isPending}
+              onClick={() => {
+                startTransition(() => {
+                  stopEvent(event.id);
+                });
               }}
             >
               stop

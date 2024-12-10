@@ -9,20 +9,25 @@ import {
 
 import { EventType } from "../../../../payload-types.ts";
 import { startEvent } from "../serverActions/eventActions.tsx";
+import { useTransition } from "react";
 
 type StartEvent = {
   eventTypes: EventType[];
 };
 
 export default function StartEvent({ eventTypes }: StartEvent) {
+  const [isPending, startTransition] = useTransition();
+
   return (
     <div className="grid grid-cols-1 gap-4 py-4">
       <Form
         className="flex flex-row gap-4"
         validationBehavior="native"
-        onSubmit={async (e) => {
+        onSubmit={(e) => {
           e.preventDefault();
-          startEvent(e.currentTarget.elements["name"].value);
+          startTransition(() => {
+            startEvent(e.currentTarget.elements["name"].value);
+          });
         }}
       >
         <Autocomplete
@@ -38,21 +43,35 @@ export default function StartEvent({ eventTypes }: StartEvent) {
             <AutocompleteItem key={item.id}>{item.name}</AutocompleteItem>
           )}
         </Autocomplete>
-        <Button type="submit" className="px-6">
+        <Button type="submit" isLoading={isPending} className="px-6">
           Add and Start
         </Button>
       </Form>
       {eventTypes.slice(0, 5).map((event) => (
-        <Button
-          key={event.id}
-          type="submit"
-          onPress={() => {
-            startEvent(event.name);
-          }}
-        >
-          {event.name}
-        </Button>
+        <PendableButton key={event.id} event={event} action={startEvent} />
       ))}
     </div>
+  );
+}
+
+type PendableButtonProps = {
+  event: EventType;
+  action: (...args: any[]) => Promise<void>;
+};
+
+function PendableButton({ event, action }: PendableButtonProps) {
+  const [isPending, startTransition] = useTransition();
+
+  return (
+    <Button
+      isLoading={isPending}
+      onPress={() => {
+        startTransition(() => {
+          action(event.name);
+        });
+      }}
+    >
+      {event.name}
+    </Button>
   );
 }
