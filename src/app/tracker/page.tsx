@@ -11,14 +11,13 @@ export default async function TrackerPage() {
 
   const eventLog = payload.find({
     collection: "EventLog",
-    sort: "-createdAt",
-    limit: 100,
+    sort: "-updatedAt",
+    pagination: false,
   });
 
   const eventTypes = await payload.find({
     collection: "EventTypes",
-    sort: "-lastUsedAt",
-    limit: 100,
+    pagination: false,
   });
 
   return (
