@@ -18,7 +18,11 @@ export interface Config {
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
-  collectionsJoins: {};
+  collectionsJoins: {
+    EventTypes: {
+      events: 'EventLog';
+    };
+  };
   collectionsSelect: {
     EventTypes: EventTypesSelect<false> | EventTypesSelect<true>;
     EventLog: EventLogSelect<false> | EventLogSelect<true>;
@@ -66,6 +70,11 @@ export interface UserAuthOperations {
 export interface EventType {
   id: string;
   name: string;
+  usageCount?: number | null;
+  events?: {
+    docs?: (string | EventLog)[] | null;
+    hasNextPage?: boolean | null;
+  } | null;
   description?: string | null;
   lastUsedAt?: string | null;
   updatedAt: string;
@@ -167,6 +176,8 @@ export interface PayloadMigration {
 export interface EventTypesSelect<T extends boolean = true> {
   id?: T;
   name?: T;
+  usageCount?: T;
+  events?: T;
   description?: T;
   lastUsedAt?: T;
   updatedAt?: T;

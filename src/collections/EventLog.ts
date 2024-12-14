@@ -7,6 +7,10 @@ export const EventLog: CollectionConfig = {
     {
       name: "id",
       type: "text",
+      defaultValue: () => randomUUID(),
+      admin: {
+        disabled: true,
+      },
     },
     {
       name: "type",
@@ -26,11 +30,4 @@ export const EventLog: CollectionConfig = {
       },
     },
   ],
-  hooks: {
-    beforeChange: [
-      async ({ operation, data }) => {
-        return operation === "create" ? { ...data, id: randomUUID() } : data;
-      },
-    ],
-  },
 };
