@@ -43,7 +43,9 @@ export default function StartEvent({ eventTypes }: StartEvent) {
             aria-label="Event Type"
             placeholder="Event Type"
             errorMessage="Please select or enter an event type"
-            defaultItems={eventTypes}
+            defaultItems={eventTypes.sort(
+              (a, b) => b.usageCount! - a.usageCount!
+            )}
           >
             {(item) => (
               <AutocompleteItem key={item.id}>{item.name}</AutocompleteItem>
@@ -62,13 +64,16 @@ export default function StartEvent({ eventTypes }: StartEvent) {
           Stop running Event
         </Switch>
       </Form>
-      {eventTypes.slice(0, 5).map((event) => (
-        <PendableButton
-          key={event.id}
-          event={event}
-          action={(eventName) => startEvent(eventName, stopRunningEvents)}
-        />
-      ))}
+      {eventTypes
+        .sort((a, b) => b.usageCount! - a.usageCount!)
+        .slice(0, 5)
+        .map((event) => (
+          <PendableButton
+            key={event.id}
+            event={event}
+            action={(eventName) => startEvent(eventName, stopRunningEvents)}
+          />
+        ))}
     </div>
   );
 }
