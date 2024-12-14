@@ -1,9 +1,20 @@
 "use client";
 
-import { Button, Card, CardBody, CardHeader } from "@nextui-org/react";
+import {
+  Button,
+  Card,
+  CardBody,
+  CardFooter,
+  CardHeader,
+  Divider,
+} from "@nextui-org/react";
 import { useEffect, useState, useTransition } from "react";
 import { EventLog, EventType } from "../../../../payload-types.ts";
 import { stopEvent } from "../serverActions/eventActions.tsx";
+
+const millisecondsPerSecond = 1000;
+const millisecondsPerMinute = millisecondsPerSecond * 60;
+const millisecondsPerHour = millisecondsPerMinute * 60;
 
 type EventProps = {
   event: EventLog;
@@ -18,9 +29,19 @@ export default function Event({ event }: EventProps) {
   );
 
   useEffect(() => {
+    const calculateDuration = () => {
+      const startTime = new Date(event.createdAt);
+      const endTime = event.endedAt ? new Date(event.endedAt) : new Date();
+
+      const durationMs = endTime.getTime() - startTime.getTime();
+      setDuration(durationMs); // Keep this for the existing time display
+    };
+
+    calculateDuration(); // Initial calculation
+
     if (!event.endedAt) {
       const interval = setInterval(() => {
-        setDuration(Date.now() - new Date(event.createdAt).getTime());
+        calculateDuration();
       }, 1000);
 
       return () => clearInterval(interval);
@@ -29,42 +50,87 @@ export default function Event({ event }: EventProps) {
 
   return (
     <Card>
-      <CardHeader>{(event.type as EventType).name}</CardHeader>
-      <CardBody className="flex-row">
-        <div>
-          <div>
-            Start:{" "}
-            {new Date(event.createdAt).toLocaleString("de-DE", {
-              day: "2-digit",
-              month: "2-digit",
-              year: "numeric",
+      <CardHeader className="justify-between">
+        <h1 className="text-large font-semibold">
+          {(event.type as EventType).name}
+        </h1>
+      </CardHeader>
+      <Divider />
+      <CardBody className="flex flex-row justify-between items-stretch h-1 min-h-fit">
+        <div className="grow">
+          <p>
+            {new Date(event.createdAt).toLocaleTimeString("de-DE", {
               hour: "2-digit",
               minute: "2-digit",
               second: "2-digit",
             })}
-          </div>
-          {event.endedAt && (
-            <div>
-              Ende:{" "}
-              {new Date(event.endedAt).toLocaleString("de-DE", {
-                day: "2-digit",
-                month: "2-digit",
-                year: "numeric",
-                hour: "2-digit",
-                minute: "2-digit",
-                second: "2-digit",
-              })}
-            </div>
-          )}
-          <div>
-            Dauer:{" "}
-            {new Date(duration).getUTCHours().toString().padStart(2, "0")}:
-            {new Date(duration).getUTCMinutes().toString().padStart(2, "0")}:
-            {new Date(duration).getUTCSeconds().toString().padStart(2, "0")}
-          </div>
+          </p>
+          <Divider />
+          <p className="text-small font-light">
+            {new Date(event.createdAt).toLocaleDateString("de-DE", {
+              day: "2-digit",
+              month: "2-digit",
+              year: "numeric",
+            })}
+          </p>
+          <Divider />
+          <p className="text-small font-extralight">Start</p>
         </div>
-        {!event.endedAt && (
-          <div className="grow flex justify-center items-center">
+        <Divider orientation="vertical" />
+        <div className="grow flex flex-col place-content-around place-items-center">
+          <p className="w-20 text-center font-mono">
+            {Math.floor(duration / millisecondsPerHour)
+              .toFixed(0)
+              .padStart(2, "0")}
+            :
+            {Math.floor(
+              (duration % millisecondsPerHour) / millisecondsPerMinute
+            )
+              .toFixed(0)
+              .padStart(2, "0")}
+            :
+            {Math.floor(
+              (duration % millisecondsPerMinute) / millisecondsPerSecond
+            )
+              .toFixed(0)
+              .padStart(2, "0")}
+          </p>
+          <Divider />
+          <p className="text-small font-extralight">Dauer</p>
+        </div>
+        <Divider orientation="vertical" />
+        <div className="grow place-items-end">
+          <p>
+            {event.endedAt
+              ? new Date(event.endedAt).toLocaleTimeString("de-DE", {
+                  hour: "2-digit",
+                  minute: "2-digit",
+                  second: "2-digit",
+                })
+              : "-"}
+          </p>
+          <Divider />
+          <p className="text-small font-light">
+            {event.endedAt
+              ? new Date(event.endedAt).toLocaleDateString("de-DE", {
+                  day: "2-digit",
+                  month: "2-digit",
+                  year: "numeric",
+                })
+              : new Date().toLocaleDateString("de-DE", {
+                  day: "2-digit",
+                  month: "2-digit",
+                  year: "numeric",
+                })}
+          </p>{" "}
+          <Divider />
+          <p className="text-small font-extralight">Ende</p>
+        </div>
+      </CardBody>
+      {!event.endedAt && (
+        <>
+          <Divider />
+          <CardFooter className="justify-end">
             <Button
               isLoading={isPending}
               onPress={() => {
@@ -75,9 +141,9 @@ export default function Event({ event }: EventProps) {
             >
               stop
             </Button>
-          </div>
-        )}
-      </CardBody>
+          </CardFooter>
+        </>
+      )}
     </Card>
   );
 }
