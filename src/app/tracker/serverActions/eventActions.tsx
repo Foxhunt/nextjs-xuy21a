@@ -51,7 +51,7 @@ export async function startEvent(
       sort: "-createdAt",
       where: {
         endedAt: {
-          equals: null,
+          exists: false,
         },
       },
       overrideAccess: false,
