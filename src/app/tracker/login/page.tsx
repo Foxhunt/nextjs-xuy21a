@@ -1,29 +1,33 @@
 "use client";
 
+import { useTransition } from "react";
 import { useRouter } from "next/navigation";
 
 import { Form, Input, Button } from "@nextui-org/react";
 
 export default function Login() {
   const router = useRouter();
+  const [isPending, startTransition] = useTransition();
 
   return (
     <Form
-      onSubmit={async (event) => {
+      onSubmit={(event) => {
         event.preventDefault();
 
-        await fetch(window.location.origin + "/api/users/login", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email: event.currentTarget.elements["username"].value,
-            password: event.currentTarget.elements["password"].value,
-          }),
-        });
+        startTransition(async () => {
+          await fetch(window.location.origin + "/api/users/login", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              email: event.currentTarget.elements["username"].value,
+              password: event.currentTarget.elements["password"].value,
+            }),
+          });
 
-        router.push("/tracker");
+          router.push("/tracker");
+        });
       }}
     >
       <Input
@@ -38,7 +42,7 @@ export default function Login() {
         placeholder="Password"
         autoComplete="current-password"
       />
-      <Button type="submit" className="w-full">
+      <Button isLoading={isPending} type="submit" className="w-full">
         Login
       </Button>
     </Form>
