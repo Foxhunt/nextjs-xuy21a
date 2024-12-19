@@ -1,5 +1,11 @@
 "use client";
 
+import { useEffect, useState, useTransition } from "react";
+
+import { EventLog, EventType } from "../../../../payload-types.ts";
+
+import { stopEvent } from "../serverActions/eventActions.tsx";
+
 import {
   Button,
   Card,
@@ -7,10 +13,8 @@ import {
   CardFooter,
   CardHeader,
   Divider,
+  Skeleton,
 } from "@nextui-org/react";
-import { useEffect, useState, useTransition } from "react";
-import { EventLog, EventType } from "../../../../payload-types.ts";
-import { stopEvent } from "../serverActions/eventActions.tsx";
 
 const millisecondsPerSecond = 1000;
 const millisecondsPerMinute = millisecondsPerSecond * 60;
@@ -139,8 +143,44 @@ export default function Event({ event }: EventProps) {
                 });
               }}
             >
-              stop
+              Stop
             </Button>
+          </CardFooter>
+        </>
+      )}
+    </Card>
+  );
+}
+
+type EventSkeletonProps = {
+  withFooter?: boolean;
+};
+
+export function EventSkeleton({ withFooter = false }: EventSkeletonProps) {
+  return (
+    <Card>
+      <CardHeader className="justify-between">
+        <Skeleton className="rounded-lg">
+          <h1 className="text-large font-semibold">Skeleton</h1>
+        </Skeleton>
+      </CardHeader>
+      <Divider />
+      <CardBody className="flex flex-row justify-between items-stretch h-1 min-h-fit">
+        <Skeleton className="rounded-lg w-full">
+          <div className="grow">
+            <p>Start</p>
+            <Divider />
+            <p className="text-small font-light">Start</p>
+            <Divider />
+            <p className="text-small font-extralight">Start</p>
+          </div>
+        </Skeleton>
+      </CardBody>
+      {withFooter && (
+        <>
+          <Divider />
+          <CardFooter className="justify-end">
+            <Button>Stop</Button>
           </CardFooter>
         </>
       )}

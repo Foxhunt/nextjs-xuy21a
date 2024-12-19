@@ -1,22 +1,27 @@
 "use client";
 
+import { use, useState, useTransition } from "react";
+
+import { PaginatedDocs } from "payload";
+import { EventType } from "../../../../payload-types.ts";
+
 import {
   Autocomplete,
   AutocompleteItem,
   Button,
   Form,
+  Skeleton,
   Switch,
 } from "@nextui-org/react";
 
-import { useState, useTransition } from "react";
-import { EventType } from "../../../../payload-types.ts";
 import { startEvent } from "../serverActions/eventActions.tsx";
 
 type StartEvent = {
-  eventTypes: EventType[];
+  eventTypesPromise: Promise<PaginatedDocs<EventType>>;
 };
 
-export default function StartEvent({ eventTypes }: StartEvent) {
+export default function StartEvent({ eventTypesPromise }: StartEvent) {
+  const eventTypes = use(eventTypesPromise).docs;
   const [isPending, startTransition] = useTransition();
   const [stopRunningEvents, setStopRunningEvents] = useState(false);
 
@@ -97,5 +102,35 @@ function PendableButton({ event, action }: PendableButtonProps) {
     >
       {event.name}
     </Button>
+  );
+}
+
+export function StartEventSkeleton() {
+  return (
+    <div className="grid grid-cols-1 gap-4 py-4">
+      <Form className="gap-4 items-stretch" validationBehavior="native">
+        <div className="flex gap-4">
+          <Autocomplete
+            name="name"
+            isRequired
+            allowsCustomValue
+            aria-label="Event Type"
+            placeholder="Event Type"
+            errorMessage="Please select or enter an event type"
+          >
+            <AutocompleteItem textValue="Skeleton" />
+          </Autocomplete>
+          <Button type="submit">Start</Button>
+        </div>
+        <Switch className="self-end" name="stopRunningEvents">
+          Stop running Event
+        </Switch>
+      </Form>
+      {new Array(5).fill("").map((_, index) => (
+        <Skeleton key={index} className="rounded-lg w-full">
+          <Button>Button</Button>
+        </Skeleton>
+      ))}
+    </div>
   );
 }

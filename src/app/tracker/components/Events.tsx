@@ -1,9 +1,9 @@
 import { use } from "react";
-import { PaginatedDocs } from "payload";
 
+import { PaginatedDocs } from "payload";
 import { EventLog } from "../../../../payload-types.ts";
 
-import Event from "./Event.tsx";
+import Event, { EventSkeleton } from "./Event.tsx";
 
 type EventsProps = {
   eventsPromise: Promise<PaginatedDocs<EventLog>>;
@@ -26,5 +26,16 @@ export default function Events({
         })}
       </div>
     )
+  );
+}
+
+export function EventsSkeleton() {
+  return (
+    <div className="gap-4 flex flex-col">
+      <EventSkeleton />
+      <EventSkeleton />
+      <EventSkeleton />
+      <EventSkeleton />
+    </div>
   );
 }

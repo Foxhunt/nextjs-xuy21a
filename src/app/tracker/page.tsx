@@ -1,10 +1,11 @@
 import { Suspense } from "react";
 
-import { getPayload } from "payload";
 import config from "@payload-config";
+import { getPayload } from "payload";
 
-import StartEvent from "./components/StartEvent.tsx";
-import Events from "./components/Events.tsx";
+import { EventSkeleton } from "./components/Event.tsx";
+import Events, { EventsSkeleton } from "./components/Events.tsx";
+import StartEvent, { StartEventSkeleton } from "./components/StartEvent.tsx";
 
 export default async function TrackerPage() {
   const payload = await getPayload({ config });
@@ -15,18 +16,20 @@ export default async function TrackerPage() {
     pagination: false,
   });
 
-  const eventTypes = await payload.find({
+  const eventTypes = payload.find({
     collection: "EventTypes",
     pagination: false,
   });
 
   return (
     <>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<EventSkeleton withFooter />}>
         <Events showOnlyRunning eventsPromise={eventLog} />
       </Suspense>
-      <StartEvent eventTypes={eventTypes.docs} />
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<StartEventSkeleton />}>
+        <StartEvent eventTypesPromise={eventTypes} />
+      </Suspense>
+      <Suspense fallback={<EventsSkeleton />}>
         <Events eventsPromise={eventLog} />
       </Suspense>
     </>
