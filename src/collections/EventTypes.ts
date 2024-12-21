@@ -1,19 +1,18 @@
-import { randomUUID } from "crypto";
 import type { CollectionConfig } from "payload";
+
+import { userRelationField } from "./fields";
+import { belongsToUser, isAuthenticated } from "./access";
 
 export const EventTypes: CollectionConfig = {
   slug: "EventTypes",
   admin: { useAsTitle: "name" },
   fields: [
+    userRelationField,
     {
-      name: "id",
+      name: "name",
       type: "text",
-      defaultValue: () => randomUUID(),
-      admin: {
-        disabled: true,
-      },
+      required: true,
     },
-    { name: "name", type: "text", required: true },
     {
       name: "usageCount",
       type: "number",
@@ -23,7 +22,7 @@ export const EventTypes: CollectionConfig = {
         afterRead: [
           async ({ req, data }) => {
             const count = await req.payload.db.count({
-              collection: "EventLog",
+              collection: "Events",
               where: {
                 type: {
                   equals: data!.id,
@@ -36,8 +35,16 @@ export const EventTypes: CollectionConfig = {
         ],
       },
     },
-    { name: "events", type: "join", collection: "EventLog", on: "type" },
-    { name: "description", type: "text" },
+    {
+      name: "events",
+      type: "join",
+      collection: "Events",
+      on: "type",
+    },
+    {
+      name: "description",
+      type: "text",
+    },
     {
       name: "lastUsedAt",
       type: "date",
@@ -51,4 +58,10 @@ export const EventTypes: CollectionConfig = {
       },
     },
   ],
+  access: {
+    create: isAuthenticated,
+    read: belongsToUser,
+    update: belongsToUser,
+    delete: belongsToUser,
+  },
 };

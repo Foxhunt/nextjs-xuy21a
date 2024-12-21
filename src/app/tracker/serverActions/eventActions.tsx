@@ -1,32 +1,19 @@
 "use server";
 
-import { headers } from "next/headers";
 import { revalidatePath } from "next/cache";
 
 import { getPayload } from "payload";
 import config from "@payload-config";
+import { EventType, User } from "../../../../payload-types.ts";
 
-import { EventType } from "../../../../payload-types.ts";
-import { redirect } from "next/navigation";
-import { RedirectType } from "next/navigation";
-
-async function authUser() {
-  const payload = await getPayload({ config });
-  const { user } = await payload.auth({ headers: await headers() });
-
-  if (!user) {
-    redirect("/tracker/login", RedirectType.push);
-  }
-
-  return user;
-}
+import { authUser } from "./userActions.tsx";
 
 export async function stopEvent(id: string) {
   const payload = await getPayload({ config });
   const user = await authUser();
 
   await payload.update({
-    collection: "EventLog",
+    collection: "Events",
     id,
     data: {
       endedAt: new Date().toISOString(),
@@ -38,16 +25,13 @@ export async function stopEvent(id: string) {
   revalidatePath("/tracker");
 }
 
-export async function startEvent(
-  eventTypeName: string,
-  stopRunningEvents: boolean
-) {
+export async function startEvent(eventTypeName: string) {
   const payload = await getPayload({ config });
-  const user = await authUser();
+  const user = (await authUser()) as User;
 
-  if (stopRunningEvents) {
+  if (user.stopRunningEvents) {
     const runningEvents = await payload.find({
-      collection: "EventLog",
+      collection: "Events",
       sort: "-createdAt",
       where: {
         endedAt: {
@@ -68,6 +52,8 @@ export async function startEvent(
     collection: "EventTypes",
     where: { name: { equals: eventTypeName } },
     limit: 1,
+    overrideAccess: false,
+    user,
   });
 
   let newEventType: EventType;
@@ -87,7 +73,7 @@ export async function startEvent(
   }
 
   await payload.create({
-    collection: "EventLog",
+    collection: "Events",
     data: {
       type: eventType.docs[0] ?? newEventType!,
     },

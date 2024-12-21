@@ -9,43 +9,84 @@
 export interface Config {
   auth: {
     users: UserAuthOperations;
+    admins: AdminAuthOperations;
   };
   collections: {
     EventTypes: EventType;
-    EventLog: EventLog;
+    Events: Event;
     users: User;
+    admins: Admin;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
   collectionsJoins: {
     EventTypes: {
-      events: 'EventLog';
+      events: 'Events';
+    };
+    users: {
+      events: 'Events';
+      eventTypes: 'EventTypes';
     };
   };
   collectionsSelect: {
     EventTypes: EventTypesSelect<false> | EventTypesSelect<true>;
-    EventLog: EventLogSelect<false> | EventLogSelect<true>;
+    Events: EventsSelect<false> | EventsSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
+    admins: AdminsSelect<false> | AdminsSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
   };
   db: {
-    defaultIDType: number;
+    defaultIDType: string;
   };
   globals: {};
   globalsSelect: {};
   locale: null;
-  user: User & {
-    collection: 'users';
-  };
+  user:
+    | (User & {
+        collection: 'users';
+      })
+    | (Admin & {
+        collection: 'admins';
+      });
   jobs: {
     tasks: unknown;
     workflows: unknown;
   };
 }
 export interface UserAuthOperations {
+  forgotPassword:
+    | {
+        email: string;
+      }
+    | {
+        username: string;
+      };
+  login:
+    | {
+        email: string;
+        password: string;
+      }
+    | {
+        password: string;
+        username: string;
+      };
+  registerFirstUser: {
+    password: string;
+    username: string;
+    email?: string;
+  };
+  unlock:
+    | {
+        email: string;
+      }
+    | {
+        username: string;
+      };
+}
+export interface AdminAuthOperations {
   forgotPassword: {
     email: string;
     password: string;
@@ -69,10 +110,11 @@ export interface UserAuthOperations {
  */
 export interface EventType {
   id: string;
+  user?: (string | null) | User;
   name: string;
   usageCount?: number | null;
   events?: {
-    docs?: (string | EventLog)[] | null;
+    docs?: (string | Event)[] | null;
     hasNextPage?: boolean | null;
   } | null;
   description?: string | null;
@@ -82,10 +124,38 @@ export interface EventType {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "EventLog".
+ * via the `definition` "users".
  */
-export interface EventLog {
+export interface User {
   id: string;
+  events?: {
+    docs?: (string | Event)[] | null;
+    hasNextPage?: boolean | null;
+  } | null;
+  eventTypes?: {
+    docs?: (string | EventType)[] | null;
+    hasNextPage?: boolean | null;
+  } | null;
+  stopRunningEvents?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+  email?: string | null;
+  username: string;
+  resetPasswordToken?: string | null;
+  resetPasswordExpiration?: string | null;
+  salt?: string | null;
+  hash?: string | null;
+  loginAttempts?: number | null;
+  lockUntil?: string | null;
+  password?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Events".
+ */
+export interface Event {
+  id: string;
+  user?: (string | null) | User;
   type: string | EventType;
   endedAt?: string | null;
   updatedAt: string;
@@ -93,10 +163,10 @@ export interface EventLog {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "users".
+ * via the `definition` "admins".
  */
-export interface User {
-  id: number;
+export interface Admin {
+  id: string;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -113,25 +183,34 @@ export interface User {
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
-  id: number;
+  id: string;
   document?:
     | ({
         relationTo: 'EventTypes';
         value: string | EventType;
       } | null)
     | ({
-        relationTo: 'EventLog';
-        value: string | EventLog;
+        relationTo: 'Events';
+        value: string | Event;
       } | null)
     | ({
         relationTo: 'users';
-        value: number | User;
+        value: string | User;
+      } | null)
+    | ({
+        relationTo: 'admins';
+        value: string | Admin;
       } | null);
   globalSlug?: string | null;
-  user: {
-    relationTo: 'users';
-    value: number | User;
-  };
+  user:
+    | {
+        relationTo: 'users';
+        value: string | User;
+      }
+    | {
+        relationTo: 'admins';
+        value: string | Admin;
+      };
   updatedAt: string;
   createdAt: string;
 }
@@ -140,11 +219,16 @@ export interface PayloadLockedDocument {
  * via the `definition` "payload-preferences".
  */
 export interface PayloadPreference {
-  id: number;
-  user: {
-    relationTo: 'users';
-    value: number | User;
-  };
+  id: string;
+  user:
+    | {
+        relationTo: 'users';
+        value: string | User;
+      }
+    | {
+        relationTo: 'admins';
+        value: string | Admin;
+      };
   key?: string | null;
   value?:
     | {
@@ -163,7 +247,7 @@ export interface PayloadPreference {
  * via the `definition` "payload-migrations".
  */
 export interface PayloadMigration {
-  id: number;
+  id: string;
   name?: string | null;
   batch?: number | null;
   updatedAt: string;
@@ -174,7 +258,7 @@ export interface PayloadMigration {
  * via the `definition` "EventTypes_select".
  */
 export interface EventTypesSelect<T extends boolean = true> {
-  id?: T;
+  user?: T;
   name?: T;
   usageCount?: T;
   events?: T;
@@ -185,10 +269,10 @@ export interface EventTypesSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "EventLog_select".
+ * via the `definition` "Events_select".
  */
-export interface EventLogSelect<T extends boolean = true> {
-  id?: T;
+export interface EventsSelect<T extends boolean = true> {
+  user?: T;
   type?: T;
   endedAt?: T;
   updatedAt?: T;
@@ -199,6 +283,25 @@ export interface EventLogSelect<T extends boolean = true> {
  * via the `definition` "users_select".
  */
 export interface UsersSelect<T extends boolean = true> {
+  events?: T;
+  eventTypes?: T;
+  stopRunningEvents?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  email?: T;
+  username?: T;
+  resetPasswordToken?: T;
+  resetPasswordExpiration?: T;
+  salt?: T;
+  hash?: T;
+  loginAttempts?: T;
+  lockUntil?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "admins_select".
+ */
+export interface AdminsSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   email?: T;

@@ -1,12 +1,12 @@
 import { use } from "react";
 
 import { PaginatedDocs } from "payload";
-import { EventLog } from "../../../../payload-types.ts";
+import { Event as PayloadEvent } from "../../../../payload-types.ts";
 
 import Event, { EventSkeleton } from "./Event.tsx";
 
 type EventsProps = {
-  eventsPromise: Promise<PaginatedDocs<EventLog>>;
+  eventsPromise: Promise<PaginatedDocs<PayloadEvent>>;
   showOnlyRunning?: boolean;
 };
 

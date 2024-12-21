@@ -15,30 +15,29 @@ services:
   #     - .env
 
   # Ensure your DATABASE_URI uses 'mongo' as the hostname ie. mongodb://mongo/my-db-name
-  # mongo:
-  #   image: mongo:latest
-  #   ports:
-  #     - "27017:27017"
-  #   command:
-  #     - --storageEngine=wiredTiger
-  #   volumes:
-  #     - data:/data/db
-  #   logging:
-  #     driver: none
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - data:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: payload
+      MONGO_INITDB_ROOT_PASSWORD: payload
 
   # Uncomment the following to use postgres
-  postgres:
-    # restart: always
-    image: postgres:latest
-    volumes:
-      - pgdata:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
-    environment:
-      - POSTGRES_PASSWORD=payload
-      - POSTGRES_USER=payload
+  # postgres:
+  #   # restart: always
+  #   image: postgres:latest
+  #   volumes:
+  #     - pgdata:/var/lib/postgresql/data
+  #   ports:
+  #     - "5432:5432"
+  #   environment:
+  #     POSTGRES_PASSWORD: payload
+  #     POSTGRES_USER: payload
 
 volumes:
-  pgdata:
-  # data:
+  data:
+  # pgdata:
   # node_modules:

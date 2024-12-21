@@ -33,10 +33,7 @@ export default function StartEvent({ eventTypesPromise }: StartEvent) {
         onSubmit={(e) => {
           e.preventDefault();
           startTransition(() => {
-            startEvent(
-              e.currentTarget.elements["name"].value,
-              e.currentTarget.elements["stopRunningEvents"].checked
-            );
+            startEvent(e.currentTarget.elements["name"].value);
           });
         }}
       >
@@ -60,24 +57,12 @@ export default function StartEvent({ eventTypesPromise }: StartEvent) {
             Start
           </Button>
         </div>
-        <Switch
-          className="self-end"
-          name="stopRunningEvents"
-          isSelected={stopRunningEvents}
-          onValueChange={setStopRunningEvents}
-        >
-          Stop running Event
-        </Switch>
       </Form>
       {eventTypes
         .sort((a, b) => b.usageCount! - a.usageCount!)
         .slice(0, 5)
         .map((event) => (
-          <PendableButton
-            key={event.id}
-            event={event}
-            action={(eventName) => startEvent(eventName, stopRunningEvents)}
-          />
+          <PendableButton key={event.id} event={event} action={startEvent} />
         ))}
     </div>
   );

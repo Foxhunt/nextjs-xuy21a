@@ -1,17 +1,13 @@
-import { randomUUID } from "crypto";
 import type { CollectionConfig } from "payload";
 
-export const EventLog: CollectionConfig = {
-  slug: "EventLog",
+import { belongsToUser, isAuthenticated } from "./access";
+import { userRelationField } from "./fields";
+
+export const Events: CollectionConfig = {
+  slug: "Events",
+  admin: { useAsTitle: "type" },
   fields: [
-    {
-      name: "id",
-      type: "text",
-      defaultValue: () => randomUUID(),
-      admin: {
-        disabled: true,
-      },
-    },
+    userRelationField,
     {
       name: "type",
       type: "relationship",
@@ -30,4 +26,10 @@ export const EventLog: CollectionConfig = {
       },
     },
   ],
+  access: {
+    create: isAuthenticated,
+    read: belongsToUser,
+    update: belongsToUser,
+    delete: belongsToUser,
+  },
 };
