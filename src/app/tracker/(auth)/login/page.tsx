@@ -68,7 +68,7 @@ export default function Login() {
         Login
       </Button>
       <p>
-        Don't have an account yet?{" "}
+        Don&apos;t have an account yet?{" "}
         <Link href="/tracker/register">Register</Link>
       </p>
     </Form>

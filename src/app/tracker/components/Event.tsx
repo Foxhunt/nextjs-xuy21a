@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useTransition } from "react";
 
-import { EventLog, EventType } from "../../../../payload-types.ts";
+import { Event as EventPayload, EventType } from "../../../../payload-types.ts";
 
 import { stopEvent } from "../serverActions/eventActions.tsx";
 
@@ -21,7 +21,7 @@ const millisecondsPerMinute = millisecondsPerSecond * 60;
 const millisecondsPerHour = millisecondsPerMinute * 60;
 
 type EventProps = {
-  event: EventLog;
+  event: EventPayload;
 };
 
 export default function Event({ event }: EventProps) {
