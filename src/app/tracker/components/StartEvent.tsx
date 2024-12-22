@@ -1,6 +1,6 @@
 "use client";
 
-import { use, useState, useTransition } from "react";
+import { use, useTransition } from "react";
 
 import { PaginatedDocs } from "payload";
 import { EventType } from "../../../../payload-types.ts";
@@ -11,7 +11,6 @@ import {
   Button,
   Form,
   Skeleton,
-  Switch,
 } from "@nextui-org/react";
 
 import { startEvent } from "../serverActions/eventActions.tsx";
@@ -23,7 +22,6 @@ type StartEvent = {
 export default function StartEvent({ eventTypesPromise }: StartEvent) {
   const eventTypes = use(eventTypesPromise).docs;
   const [isPending, startTransition] = useTransition();
-  const [stopRunningEvents, setStopRunningEvents] = useState(false);
 
   return (
     <div className="grid grid-cols-1 gap-4 py-4">
@@ -107,9 +105,6 @@ export function StartEventSkeleton() {
           </Autocomplete>
           <Button type="submit">Start</Button>
         </div>
-        <Switch className="self-end" name="stopRunningEvents">
-          Stop running Event
-        </Switch>
       </Form>
       {new Array(5).fill("").map((_, index) => (
         <Skeleton key={index} className="rounded-lg w-full">
