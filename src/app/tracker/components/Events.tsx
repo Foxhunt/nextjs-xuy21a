@@ -7,16 +7,10 @@ import Event, { EventSkeleton } from "./Event.tsx";
 
 type EventsProps = {
   eventsPromise: Promise<PaginatedDocs<PayloadEvent>>;
-  showOnlyRunning?: boolean;
 };
 
-export default function Events({
-  eventsPromise,
-  showOnlyRunning,
-}: EventsProps) {
-  const events = use(eventsPromise).docs.filter((event) =>
-    showOnlyRunning ? !event.endedAt : event.endedAt
-  );
+export default function Events({ eventsPromise }: EventsProps) {
+  const events = use(eventsPromise).docs;
 
   return (
     events.length > 0 && (
