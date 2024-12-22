@@ -7,6 +7,8 @@ import { revalidatePath } from "next/cache";
 import config from "@payload-config";
 import { getPayload } from "payload";
 
+import { User } from "../../../../payload-types";
+
 export async function authUser() {
   const payload = await getPayload({ config });
   const { user } = await payload.auth({ headers: await headers() });
@@ -14,6 +16,9 @@ export async function authUser() {
   if (!user) {
     redirect("/tracker/login");
   }
+
+  delete (user as User).eventTypes;
+  delete (user as User).events;
 
   return user;
 }
