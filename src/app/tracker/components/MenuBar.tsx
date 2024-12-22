@@ -122,7 +122,7 @@ export default function MenuBar({ user }: MenuBarProps) {
           </DrawerBody>
           <DrawerFooter>
             <Switch
-              defaultChecked={Boolean(user.stopRunningEvents)}
+              defaultSelected={Boolean(user.stopRunningEvents)}
               onValueChange={setStopRunningEvents}
             >
               Stop running Event

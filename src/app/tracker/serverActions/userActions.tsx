@@ -2,6 +2,7 @@
 
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
+import { revalidatePath } from "next/cache";
 
 import config from "@payload-config";
 import { getPayload } from "payload";
@@ -31,5 +32,5 @@ export async function setStopRunningEvents(value: boolean) {
     user,
   });
 
-  return value;
+  revalidatePath("/tracker");
 }
