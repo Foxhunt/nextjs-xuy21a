@@ -60,7 +60,7 @@ export default function Event({ event }: EventProps) {
         </h1>
       </CardHeader>
       <Divider />
-      <CardBody className="flex flex-row justify-between items-stretch h-1 min-h-fit">
+      <CardBody className="flex flex-row justify-between items-stretch min-h-1 h-fit">
         <div className="grow">
           <p>
             {new Date(event.createdAt).toLocaleTimeString("de-DE", {
@@ -103,7 +103,7 @@ export default function Event({ event }: EventProps) {
           <p className="text-small font-extralight">Dauer</p>
         </div>
         <Divider orientation="vertical" />
-        <div className="grow place-items-end">
+        <div className="grow flex flex-col place-items-end">
           <p>
             {event.endedAt
               ? new Date(event.endedAt).toLocaleTimeString("de-DE", {
