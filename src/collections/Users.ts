@@ -4,9 +4,7 @@ import { isAdminOrSelf } from "./access";
 export const Users: CollectionConfig = {
   slug: "users",
   auth: {
-    loginWithUsername: {
-      allowEmailLogin: true,
-    },
+    loginWithUsername: true,
     tokenExpiration: 86400, // 1 Day, 24h * 60m * 60s
   },
   fields: [

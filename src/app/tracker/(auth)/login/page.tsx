@@ -26,7 +26,7 @@ export default function Login() {
                 "Content-Type": "application/json",
               },
               body: JSON.stringify({
-                email: event.currentTarget.elements["username"].value,
+                username: event.currentTarget.elements["username"].value,
                 password: event.currentTarget.elements["password"].value,
               }),
             }
