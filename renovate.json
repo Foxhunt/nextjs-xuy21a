@@ -4,12 +4,5 @@
   "lockFileMaintenance": {
     "enabled": true,
     "automerge": true
-  },
-  "packageRules": [
-    {
-      "groupName": "Mend: minor and patch dependency updates",
-      "matchUpdateTypes": ["minor", "patch"],
-      "automerge": true
-    }
-  ]
+  }
 }
