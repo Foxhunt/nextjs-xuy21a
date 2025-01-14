@@ -4,5 +4,10 @@
   "lockFileMaintenance": {
     "enabled": true,
     "automerge": true
-  }
+  },
+  "packageRules": [
+    {
+      "extends": ["group:allNonMajor"]
+    }
+  ]
 }
