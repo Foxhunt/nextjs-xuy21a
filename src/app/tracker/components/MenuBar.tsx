@@ -17,7 +17,7 @@ import {
   RangeValue,
   Switch,
   useDisclosure,
-} from "@nextui-org/react";
+} from "@heroui/react";
 
 import {
   CalendarDate,

@@ -11,7 +11,7 @@ import {
   Button,
   Form,
   Skeleton,
-} from "@nextui-org/react";
+} from "@heroui/react";
 
 import { startEvent } from "../serverActions/eventActions.tsx";
 
