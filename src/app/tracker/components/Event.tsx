@@ -14,7 +14,7 @@ import {
   CardHeader,
   Divider,
   Skeleton,
-} from "@nextui-org/react";
+} from "@heroui/react";
 
 const millisecondsPerSecond = 1000;
 const millisecondsPerMinute = millisecondsPerSecond * 60;

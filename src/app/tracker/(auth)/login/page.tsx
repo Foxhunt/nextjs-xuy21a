@@ -3,7 +3,7 @@
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 
-import { Form, Input, Button, Link } from "@nextui-org/react";
+import { Form, Input, Button, Link } from "@heroui/react";
 
 export default function Login() {
   const router = useRouter();
