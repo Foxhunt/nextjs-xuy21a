@@ -17,12 +17,12 @@ export default function Work() {
         <ExternalLink href="https://bretagne.vercel.app/">
           Extra Muros 2022 Bretange
         </ExternalLink>
-        <ExternalLink href="https://www.welldone24.de/">
-          Welldone24
+        <ExternalLink href={"https://dordogne.vercel.app/"}>
+          Wieso Bilder?
         </ExternalLink>
-        {/* <ExternalLink href={"https://app.mobilesys.de/login"}>
-          GoFundYourself
-        </ExternalLink> */}
+        <ExternalLink href={"https://will-it-stick.vercel.app/"}>
+          Will it stick?
+        </ExternalLink>
         <ExternalLink href={"https://indexed.cloud/"}>
           indexed.cloud
         </ExternalLink>
@@ -31,10 +31,6 @@ export default function Work() {
         </ExternalLink>
         <ExternalLink href="https://github-event-well-foxhunt.vercel.app/">
           github-event-well
-        </ExternalLink>
-        <ExternalLink href="https://convos.art/">convos.art</ExternalLink>
-        <ExternalLink href="https://dreambookspace.vercel.app/">
-          dreambook.space
         </ExternalLink>
         <ExternalLink href="https://quorum-sensing-axnuog89l.now.sh/">
           quorum-sensing
