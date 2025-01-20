@@ -5,15 +5,17 @@ import { differenceInWeeks } from "date-fns";
 
 const Circle = ({ color, children }) => (
   <Icon viewBox="0 0 30 30" color={color} h="calc(100vw / 52 - 4px)">
-    <circle
-      cx="15"
-      cy="15"
-      r="13"
-      strokeWidth="2"
-      stroke="#a6a6a6"
-      fill="currentColor"
-    />
-    {children}
+    <svg>
+      <circle
+        cx="15"
+        cy="15"
+        r="13"
+        strokeWidth="2"
+        stroke="#a6a6a6"
+        fill="currentColor"
+      />
+      {children}
+    </svg>
   </Icon>
 );
 
